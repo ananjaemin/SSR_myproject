@@ -4,20 +4,18 @@ export default async function handler(req,res){
     try{
         switch(req.method){
             case "POST":{
-                save(req,res)
-                return 
+                save(req,res) 
+                return res.status(200).json({name:"db전송 성공"})
             }
         }
         
     }
     catch{
-        res.status(200).json({name:"실패"});
+        res.status(200).json({name:"db전송 실패"});
     }
+    return res.json({name:"정상적인 경로로 들어온게 아닙니다."})
 }
 
-function gopage(){
-    window.location.href="../test"
-}
 
 const save = async(req,res )=>{
     const {title,content} = req.body

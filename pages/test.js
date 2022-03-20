@@ -13,8 +13,8 @@ export default function test(props) {
         }
 
         <form method="POST" action="./api/posts">
-            title : <input name="title" id="title"></input> <br></br>
-            content : <input name="content" id="content"></input>  <br></br>
+            title : <input name="title"></input> <br></br>
+            content : <input name="content"></input>  <br></br>
             <input type="submit"></input>
         </form>
     </div>
