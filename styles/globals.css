@@ -20,3 +20,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input:focus {
+  color: black;
+  outline:none;
+}
+
+
