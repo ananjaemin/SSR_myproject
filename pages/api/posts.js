@@ -1,6 +1,6 @@
 import { db } from "../../lib/db";
 
-export default async function handler(req,res){
+export default (req,res)=>{
     try{
         switch(req.method){
             case "POST":{
@@ -18,10 +18,10 @@ export default async function handler(req,res){
 
 
 const save = async(req,res )=>{
-    const {title,content} = req.body
+    const {title,content,password} = req.body
     const result = await db.query("insert into posts set ?",{
         title,
-        content
+        content,
     });
     return res.result
 }

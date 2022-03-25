@@ -3,7 +3,7 @@ import 'tailwindcss/tailwind.css';
 import Layout from '../components/layout';
 import Head from 'next/head';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps },{token}) {
   return(
     <div>
       <Head>
@@ -17,5 +17,13 @@ function MyApp({ Component, pageProps }) {
     </div>
   ) 
 }
+
+
+
+export function getServerSideProps({req,res}) {
+  console.log(req.cookies)
+  return {props: { token: req.cookies.token || ""}};
+}
+  
 
 export default MyApp
