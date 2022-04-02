@@ -1,20 +1,23 @@
+import { useRouter } from "next/router";
+
 export default function test(props) {
-    const {hello} = props;
+    const {hello} = props
     return <div>
-        <h1>성공</h1>
+        <h1>성공</h1><br></br>
         {
             hello.map(
                 (item)=><>
-                    <h2>{item.title}</h2>
-                    <p>{item.content}</p>
+                    <h2>{item.name}</h2>
+                    <p>{item.createdtime}</p>
+                    <p>{item.email}</p><br></br>
                 </>
             )
 
         }
-
-        <form method="POST" action="./api/posts">
-            title : <input name="title"></input> <br></br>
-            content : <input name="content"></input>  <br></br>
+        <form method="POST" action="./api/join">
+            name : <input name="name" className="text-black"></input> <br></br>
+            email : <input name="email" className="text-black"></input> <br></br>
+            password : <input name="password" type="password" className="text-black" ></input>  <br></br>
             <input type="submit"></input>
         </form>
     </div>

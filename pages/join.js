@@ -7,7 +7,7 @@ export default function join(){
                         회원가입
                     </div>
 
-                    <form method="POST" action="./api/join_post" className="w-full h-full flex flex-col items-center">
+                    <form method="POST" action="./api/join" className="w-full h-full flex flex-col items-center">
 
                         <div className='w-3/4 flex justify-center items-center flex-col mb-4'>
                             <div className='w-full text-black font-[1000] mb-2'>
@@ -17,9 +17,9 @@ export default function join(){
                         </div>
                         <div className='w-3/4 flex justify-center items-center flex-col mb-4'>
                             <div className='w-full text-black font-[1000] mb-2'>
-                                아이디
+                                이메일
                             </div>
-                            <input name="id" placeholder=" 아이디를 입력하세요" className='text-black bg-stone-200 w-[295px] h-[40px] border-solid border-2 border-stone-300'></input>
+                            <input name="email" type="email" placeholder="이메일을 입력하세요" className='text-black bg-stone-200 w-[295px] h-[40px] border-solid border-2 border-stone-300'></input>
                         </div>
                         <div className='w-3/4 flex justify-center items-center flex-col'>
                             <div className='w-full text-black font-[1000] mb-2'>
