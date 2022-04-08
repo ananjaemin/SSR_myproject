@@ -1,4 +1,4 @@
-import cookie, { serialize, parse } from 'cookie'
+import cookie, { parse } from 'cookie'
 import Iron from '@hapi/iron'
 import { findUser,validatePassword } from './join'
 
@@ -13,10 +13,12 @@ export default async function setTokenCookie(req,res){
 
   const user =  await findUser({ email: email });
   console.log(user, await validatePassword(user, password));
+
   if (user && (await validatePassword(user, password))) {
       const session = {
           id: user.id,
           email: user.email,
+          name: user.name,
       };
       const createdAt = Date.now()
       const obj = {session, createdAt, maxAge: MAX_AGE }
@@ -33,8 +35,10 @@ export default async function setTokenCookie(req,res){
             sameSite: 'lax',
           })
       );
-
       res.json({ success: true });
+      const test = await getToken(req)
+      console.log(test)
+      console.log(test.session.email)
       return
 
 
@@ -45,21 +49,10 @@ export default async function setTokenCookie(req,res){
 
 }
 
-// export default (req,res) => {
-//   const cookie = serialize(TOKEN_NAME, "ddd", {
-//     maxAge: MAX_AGE,  
-//     expires: new Date(Date.now() + MAX_AGE * 1000),
-//     httpOnly: true,
-//     secure: process.env.NODE_ENV === 'production',
-//     path: '/',
-//     sameSite: 'lax',
-//   })
-
-//     res.setHeader('Set-Cookie',cookie)
-// }
 
 
-// export function removeTokenCookie(res) {
+
+// export function removeTokenCookie(res) {            로그아웃
 //   const cookie = serialize(TOKEN_NAME, '', {
 //     maxAge: -1,
 //     path: '/',
@@ -68,17 +61,30 @@ export default async function setTokenCookie(req,res){
 //   res.setHeader('Set-Cookie', cookie)
 // }
 
-// export function parseCookies(req) {
+export function parseCookies(req) {
 
-//   if (req.cookies) {
-//     return req.cookies
-//   }
+  if (req.cookies) {
+    return req.cookies
+  }
 
-//   const cookie = req.headers?.cookie
-//   return parse(cookie || '')
-// }
+  const cookie = req.headers?.cookie
+  return parse(cookie || '')
+}
 
-// export function getTokenCookie(req) {
-//   const cookies = parseCookies(req)
-//   return cookies[TOKEN_NAME]
-// }
+export async function getToken(req) {
+  const cookies = parseCookies(req)
+  const token = cookies[TOKEN_NAME]
+  if(!token){
+    return
+  }
+
+  const session = await Iron.unseal(token, TOKEN_SECRET, Iron.defaults)
+  const expiresAt = session.createdAt + session.maxAge * 1000           
+
+  if (Date.now() < expiresAt){
+    return session
+  }
+
+
+  return session
+}

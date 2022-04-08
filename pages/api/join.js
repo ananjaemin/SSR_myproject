@@ -1,4 +1,3 @@
-import { db } from "../../lib/db";
 import crypto from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
@@ -53,8 +52,8 @@ export async function findUser({ email }) {
             values: [ email ],
         });
         return result[0];
-    } catch (error) {
-        console.log(error); //이메일 못찾으면 여기로 (현재 로그인에러임 화면에 말 띠우게할것!)
+    } catch (res) {
+        return res.json({ success: false }); //이메일 못찾으면 여기로 (현재 로그인에러임 화면에 말 띠우게할것)
     }
 }
 
