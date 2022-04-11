@@ -1,16 +1,19 @@
 //import { viewer } from "./api/login_user" 
 import useSWR from "swr"
-// import { parse } from "cookie";
+import { parse } from "cookie";
 import Iron from '@hapi/iron'
 
-export default  function about(props){
-    const {user} = props
-    // const { data } = useSWR('./api/login_user',fetcher)
+const TOKEN_SECRET = process.env.TOKEN_SECRET
 
+export default  function about(props,req,res){
+    // const { data } = useSWR('./api/login_user',fetcher)
+    const {test} = props
     return(
         <div>
-            about<br></br>
-            {user.name} 
+            {test.id}<br></br>
+            {test.email}<br></br>
+            {test.name} <br></br>
+            {test.createdtime}
         </div>
     )
 }
@@ -19,18 +22,31 @@ export default  function about(props){
 export async function getServerSideProps(context){ 
     const cookie = context.req ? context.req.headers.cookie : "";
     const token = cookieStringToObject(cookie)
-    
-    //console.log(token.token)
+    const session = await Iron.unseal(token.token,TOKEN_SECRET,Iron.defaults)
 
-    const res = await fetch("http://localhost:3000/api/login_user");
-    const user = await res.json();
+
+    //원래 의도는 세션에서 email가져와서 finduser로 db에있는 정보를 가져오는건데 
+    //이건 세션에 있는 정보를 가져오는거네? 아 몰라 세션에 다 넣어버렷
+
+
+    // const res = await fetch("http://localhost:3000/api/login_user");
+    // const user = await res.json();
     return {
         props: {
-            user,
-
+            test:session,
         }
     };
 }
+
+
+// export async function dd(props){
+//     const token = props.test
+//     const session = await Iron.unseal(token,"eobikeobikeobikeobikeobikeobikqw", Iron.defaults)
+//     return session
+// }
+
+
+
 const cookieStringToObject = (cookieString) => {
     if (!cookieString) {
       return "";
@@ -46,21 +62,4 @@ const cookieStringToObject = (cookieString) => {
       return result;
     }
 };
-
-// export function parseCookies(req) {
-
-//   if (req.cookies) {
-//     return req.cookies
-//   }
-
-//   const cookie = req.headers?.cookie
-//   return parse(cookie || '')
-// }
-
-
-// about.getInitialProps = async ctx => {
-//     const res = await fetch('http://localhost:3000/api/login_user')
-//     const json = await res.json()
-//     return { name: json.name }
-// }
 

@@ -20,6 +20,7 @@ export default async function setTokenCookie(req,res){
           id: user.id,
           email: user.email,
           name: user.name,
+          createdtime: user.createdtime,
       };
       const createdAt = Date.now()
       const obj = { ...session, createdAt, maxAge: MAX_AGE }
