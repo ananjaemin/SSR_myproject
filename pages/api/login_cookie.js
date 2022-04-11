@@ -39,7 +39,11 @@ export default async function setTokenCookie(req,res){
         );
         res.statusCode = 200;
         return res.json({ success: true });
+    }else{
+      return res.json({success:false});
     }
+
+
   }catch{
     return res.json({ success: false });
   }
