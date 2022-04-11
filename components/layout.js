@@ -1,11 +1,8 @@
-import cookie from 'cookie';
-import { eee } from '../pages/user';
-import { useState } from 'react/cjs/react.production.min';
 
 
-export default function layout (){
+const TOKEN_SECRET = process.env.TOKEN_SECRET
 
-
+export default function layout (props){
 
     return(
         <div className="w-full h-12 bg-[#0C151C] flex justify-center items-center">
@@ -16,8 +13,8 @@ export default function layout (){
                 <div className="w-3/4 h-full flex items-center justify-between">
                     <div className="w-3/4 h-full flex items-center ">
                         <div className="w-3/4 h-full flex items-center justify-evenly">
-                            <a href="/about" className="">
-                                About
+                            <a href="/user" className="">
+                                user
                             </a>
                             <a href="/">
                                 none
@@ -32,7 +29,8 @@ export default function layout (){
 
                     </div>
 
-                    <a href="/login" id="test" className="bg-[#2c4659] rounded-2xl py-[3px] px-[15px] text-center font-semibold">login</a>
+
+                    <a href="/login" className="bg-[#2c4659] rounded-2xl py-[3px] px-[15px] text-center font-semibold">login</a>
 
 
 
@@ -44,5 +42,4 @@ export default function layout (){
 
 
 
-  
 

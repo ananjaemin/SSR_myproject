@@ -1,4 +1,10 @@
+import { useRouter } from "next/router"
+
+
 export default function login(){
+    const router = useRouter();
+
+
     return(
     <div className="w-full h-[600px] flex items-center justify-center mt-10">
         <div className='w-3/4 h-full flex items-center justify-center'>
