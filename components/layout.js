@@ -1,7 +1,5 @@
 
 
-const TOKEN_SECRET = process.env.TOKEN_SECRET
-
 export default function layout (props){
 
     return(

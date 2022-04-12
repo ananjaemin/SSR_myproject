@@ -1,7 +1,5 @@
 //import { viewer } from "./api/login_user" 
 import Iron from '@hapi/iron'
-import { useState,useEffect } from 'react'
-import { useRouter } from 'next/router'
 
 
 
@@ -9,8 +7,7 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET
 
 
 
-export default  function user(props,req,res){
-    const router = useRouter();
+export default  function user(props){
     const {admin} = props;
     if (typeof props.tokend === "string"){
       return<div>
@@ -48,10 +45,14 @@ export default  function user(props,req,res){
 
               </div>
             </div>
-
+            <div className='w-full flex justify-end '>
+              <form method='POST' action='./api/logout'>
+                <button className='text-slate-100/60'>logout</button>
+              </form>
+            </div>
             <div className='w-full h-[700px] flex items-center justify-center'>
               <div className='w-[1100px] h-[600px] bg-slate-800/70 rounded-2xl flex'>
-                <div className='w-full h-full flex flex-col p-3 items-center'>
+                <div className='w-full h-full flex flex-col p-3 items-center overflow-auto overflow-x-hidden scrollbar-hide'>
                   {
                     admin.map((item)=>
                       <>
@@ -109,6 +110,12 @@ export default  function user(props,req,res){
               </div>
 
             </div>
+          </div>
+
+          <div className='w-full flex justify-end '>
+            <form method='POST' action='./api/logout'>
+              <button className='text-slate-100/60'>logout</button>
+            </form>
           </div>
         </div>
       )

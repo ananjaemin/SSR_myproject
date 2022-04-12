@@ -1,15 +1,13 @@
 import cookie from "cookie"
+import { TOKEN_NAME } from "./login_cookie";
 
-export default(req,res)=>{
+export default function removeTokenCookie(req,res) {          
     res.setHeader(
         "Set-Cookie",
-        cookie.serialize("token","",{
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== "development",
-            sameSite: "strict",
-            path:"/",
+        cookie.serialize(TOKEN_NAME,'',{
+          maxAge: -1,
+          path: '/',
         })
     );
-    res.statusCode = 200;
-    res.json({ success: true });
+  return res.json({success:true})
 }
