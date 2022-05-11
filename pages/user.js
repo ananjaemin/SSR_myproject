@@ -13,7 +13,7 @@ export default  function user(props){
       return<div>
         로그인해 주세요
       </div>
-    }else if(props.user.id === "13fcf6f2-d9d0-4fc6-9f52-c810b93f450c"){
+    }else if(props.user.id === "a812b02f-dc39-4437-bd8e-6e11a7846c22"){
       return(
           <div className='w-full flex flex-col'>
             <div className='w-full flex items-center'>
@@ -124,7 +124,6 @@ export default  function user(props){
 }
 
 
-
 export async function getServerSideProps(context){
     const cookie = context.req ? context.req.headers.cookie : "";
     const res = await fetch("http://localhost:3000/api/adminpage")
@@ -148,7 +147,7 @@ export async function getServerSideProps(context){
 
 
     //원래 의도는 세션에서 email가져와서 finduser로 db에있는 정보를 가져오는건데 
-    //이건 세션에 있는 정보를 가져오는거네? 아 몰라 세션에 다 넣어버렷
+    //이건 세션에 있는 정보를 가져오는거네? 아 몰라 세션에 다 넣어
 
 
     // const res = await fetch("http://localhost:3000/api/login_user");

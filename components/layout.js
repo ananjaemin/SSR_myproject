@@ -1,10 +1,10 @@
 
 
-export default function layout (props){
+export default function layout (){
 
     return(
-        <div className="w-full h-12 bg-[#0C151C] flex justify-center items-center">
-            <div className="w-11/12 h-full flex items-center justify-between">
+        <div className="w-full h-12 bg-[#0C151C] flex justify-center items-center ">
+            <div className="w-11/12 h-full flex items-center justify-between">  
                 <a href="/" className="h-full text-[35px] font-semibold flex items-center ">
                     SSR
                 </a>

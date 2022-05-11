@@ -1,4 +1,4 @@
-import cookie, { parse } from 'cookie'
+import cookie from 'cookie'
 import Iron from '@hapi/iron'
 import { findUser,validatePassword } from './join'
 import { useRouter } from 'next/router'
